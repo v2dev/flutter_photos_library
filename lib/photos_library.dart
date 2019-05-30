@@ -52,6 +52,7 @@ class PhotosLibrary {
     var assets = List<Asset>();
     for (var item in results) {
       var asset = Asset(
+          type: item['type'],
           identifier: item['identifier'],
           width: item['width'],
           height: item['height']);
