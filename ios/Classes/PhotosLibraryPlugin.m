@@ -213,6 +213,9 @@ static NSString *const PhotosLibraryPluginChannelName = @"flutter.yang.me/photos
     else if([self handleRequestThumbnail:call result:result]) {
         
     }
+    else if([self handleRequestVideo:call result:result]) {
+        
+    }
     else {
         result(FlutterMethodNotImplemented);
     }
