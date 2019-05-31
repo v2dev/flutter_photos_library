@@ -142,6 +142,61 @@ static NSString *const PhotosLibraryPluginChannelName = @"flutter.yang.me/photos
     return FALSE;
 }
 
+- (BOOL)handleRequestVideo:(FlutterMethodCall*)call result:(FlutterResult)result {
+    if([@"requestVideo" isEqualToString:call.method]) {
+        if(call.arguments && [call.arguments isKindOfClass:[NSArray class]]) {
+            NSArray* arguments = call.arguments;
+            if(3 == arguments.count) {
+                if([arguments[0] isKindOfClass:[NSString class]]) {
+                    NSString *identifier = arguments[0];
+                    int width = -1;
+                    int height = -1;
+                    if([arguments[1] isKindOfClass:[NSNumber class]]) {
+                        NSNumber* widthN = arguments[1];
+                        width = widthN.intValue;
+                    }
+                    else {
+                        width = 200;
+                    }
+                    if([arguments[2] isKindOfClass:[NSNumber class]]) {
+                        NSNumber* heightN = arguments[2];
+                        height = heightN.intValue;
+                    }
+                    else {
+                        height = 200;
+                    }
+                    PHFetchResult<PHAsset *> * results = [PHAsset fetchAssetsWithLocalIdentifiers:@[identifier] options:nil];
+                    if (results.count > 0) {
+                        PHAsset* asset = results[0];
+                        PHVideoRequestOptions* options = [PHVideoRequestOptions new];
+                        options.version = PHVideoRequestOptionsVersionOriginal;
+                        options.deliveryMode = PHVideoRequestOptionsDeliveryModeAutomatic;
+                        options.networkAccessAllowed = NO;
+                        
+                        PHImageRequestID ID =  [[PHImageManager defaultManager] requestAVAssetForVideo:asset options:options resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                NSString *channelName = [PhotosLibraryPluginChannelName stringByAppendingFormat:@"/image/%@", identifier];
+                                AVURLAsset *urlAsset = (AVURLAsset*)asset;
+                                NSURL *url = urlAsset.URL;
+                                NSData *videoData = [NSData dataWithContentsOfURL:url];
+                                [self.messenger sendOnChannel:channelName message:videoData];
+                            });
+                        }];
+                        
+                        if(PHInvalidImageRequestID != ID) {
+                            result(@YES);
+                            return TRUE;
+                        }
+                    }
+                }
+            }
+        }
+        result(@NO);
+        return TRUE;
+    }
+    return FALSE;
+}
+
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
     if([self handlePlatformVersion:call result:result]) {
         

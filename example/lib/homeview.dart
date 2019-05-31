@@ -63,7 +63,7 @@ class HomeState extends State<HomeView> {
   void loadAssets() async {
     try {
       var assets =
-          await PhotosLibrary.fetchMediaWithType(PhotosLibraryMediaType.Photo);
+          await PhotosLibrary.fetchMediaWithType(PhotosLibraryMediaType.Video);
       setState(() {
         this._assets.clear();
         this._assets.addAll(assets);

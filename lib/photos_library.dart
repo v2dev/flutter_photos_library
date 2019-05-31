@@ -66,4 +66,11 @@ class PhotosLibrary {
         .invokeMethod("requestThumbnail", [identifier, width, height]);
     return ret;
   }
+
+  static Future<bool> requestVideo(
+      String identifier, int width, int height) async {
+    bool ret = await _channel
+        .invokeMethod("requestVideo", [identifier, width, height]);
+    return ret;
+  }
 }
