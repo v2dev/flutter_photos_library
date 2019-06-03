@@ -143,7 +143,6 @@ static NSString *const PhotosLibraryPluginChannelName = @"flutter.yang.me/photos
 }
 
 - (BOOL)handleRequestVideo:(FlutterMethodCall*)call result:(FlutterResult)result {
-    __block NSURL *videoURL;
     if([@"requestVideo" isEqualToString:call.method]) {
         if(call.arguments && [call.arguments isKindOfClass:[NSArray class]]) {
             NSArray* arguments = call.arguments;
@@ -166,7 +165,6 @@ static NSString *const PhotosLibraryPluginChannelName = @"flutter.yang.me/photos
                     else {
                         height = 200;
                     }
-                    
                     PHFetchResult<PHAsset *> * results = [PHAsset fetchAssetsWithLocalIdentifiers:@[identifier] options:nil];
                     if (results.count > 0) {
                         PHAsset* asset = results[0];
@@ -180,26 +178,24 @@ static NSString *const PhotosLibraryPluginChannelName = @"flutter.yang.me/photos
                                 NSString *channelName = [PhotosLibraryPluginChannelName stringByAppendingFormat:@"/image/%@", identifier];
                                 AVURLAsset *urlAsset = (AVURLAsset*)asset;
                                 NSURL *url = urlAsset.URL;
-                                videoURL = url;
                                 NSData *videoData = [NSData dataWithContentsOfURL:url];
                                 [self.messenger sendOnChannel:channelName message:videoData];
                             });
                         }];
                         
                         if(PHInvalidImageRequestID != ID) {
-                            result(videoURL);
-                            return videoURL;
+                            result(@YES);
+                            return TRUE;
                         }
                     }
                 }
             }
         }
-        result(videoURL);
-        return videoURL;
+        result(@NO);
+        return TRUE;
     }
-    return videoURL;
+    return FALSE;
 }
-
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
     if([self handlePlatformVersion:call result:result]) {
