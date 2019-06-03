@@ -68,9 +68,9 @@ class PhotosLibrary {
     return ret;
   }
 
-  static Future<String> requestVideo(
+  static Future<bool> requestVideo(
       String identifier, int width, int height) async {
-    String ret = await _channel
+    bool ret = await _channel
         .invokeMethod("requestVideo", [identifier, width, height]);
     return ret;
   }
