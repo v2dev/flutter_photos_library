@@ -165,6 +165,7 @@ static NSString *const PhotosLibraryPluginChannelName = @"flutter.yang.me/photos
                     else {
                         height = 200;
                     }
+                    __block NSURL *videoURL;
                     PHFetchResult<PHAsset *> * results = [PHAsset fetchAssetsWithLocalIdentifiers:@[identifier] options:nil];
                     if (results.count > 0) {
                         PHAsset* asset = results[0];
@@ -178,13 +179,14 @@ static NSString *const PhotosLibraryPluginChannelName = @"flutter.yang.me/photos
                                 NSString *channelName = [PhotosLibraryPluginChannelName stringByAppendingFormat:@"/image/%@", identifier];
                                 AVURLAsset *urlAsset = (AVURLAsset*)asset;
                                 NSURL *url = urlAsset.URL;
+                                videoURL = url;
                                 NSData *videoData = [NSData dataWithContentsOfURL:url];
                                 [self.messenger sendOnChannel:channelName message:videoData];
                             });
                         }];
                         
                         if(PHInvalidImageRequestID != ID) {
-                            result(@YES);
+                            result(videoURL);
                             return TRUE;
                         }
                     }
@@ -196,6 +198,7 @@ static NSString *const PhotosLibraryPluginChannelName = @"flutter.yang.me/photos
     }
     return FALSE;
 }
+
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
     if([self handlePlatformVersion:call result:result]) {
