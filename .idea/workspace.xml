@@ -2,6 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fd155252-32b5-4074-9770-cc0cec6e6dc8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/photos_library/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/photos_library/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/photos_library/ios/Classes/PhotosLibraryPlugin.m" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/photos_library/ios/Classes/PhotosLibraryPlugin.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/photos_library/lib/assetview.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/photos_library/lib/assetview.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/photos_library/lib/photos_library.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/photos_library/lib/photos_library.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/PhotosLibraryPlugin.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/PhotosLibraryPlugin.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/assetview.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/assetview.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/photos_library.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/photos_library.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
@@ -29,25 +37,25 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="dart" value="5" />
+          <entry key="dart" value="6" />
           <entry key="m" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Dart" value="5" />
+          <entry key="Dart" value="6" />
           <entry key="ObjectiveC" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dart" value="60" />
+          <entry key="dart" value="134" />
           <entry key="m" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Dart" value="60" />
+          <entry key="Dart" value="134" />
           <entry key="ObjectiveC" value="1" />
         </counts>
       </usages-collector>
@@ -58,8 +66,17 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/photos_library.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="70" column="20" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="20" />
+            <state relative-caret-position="715">
+              <caret line="90" column="3" lean-forward="true" selection-start-line="90" selection-start-column="3" selection-end-line="90" selection-end-column="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../../FlutterDevelopment/flutter/packages/flutter/lib/src/services/platform_channel.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="183">
+              <caret line="292" column="12" selection-start-line="292" selection-start-column="12" selection-end-line="292" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -76,8 +93,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ios/Classes/PhotosLibraryPlugin.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="204" column="8" selection-start-line="204" selection-start-column="8" selection-end-line="204" selection-end-column="8" />
+            <state relative-caret-position="303">
+              <caret line="346" column="8" selection-start-line="346" selection-start-column="8" selection-end-line="346" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -85,8 +102,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/example/lib/homeview.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1050">
-              <caret line="70" column="18" selection-start-line="70" selection-start-column="18" selection-end-line="70" selection-end-column="18" />
+            <state relative-caret-position="338">
+              <caret line="77" column="19" selection-start-line="77" selection-start-column="19" selection-end-line="77" selection-end-column="19" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -97,8 +114,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/assetview.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="810">
-              <caret line="57" column="3" selection-start-line="57" selection-start-column="3" selection-end-line="57" selection-end-column="3" />
+            <state relative-caret-position="557">
+              <caret line="61" column="27" selection-start-line="61" selection-start-column="27" selection-end-line="61" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -113,6 +130,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>requestThumbnail</find>
+      <find>Vidoe Path</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -122,9 +140,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/example/lib/homeview.dart" />
-        <option value="$PROJECT_DIR$/lib/assetview.dart" />
         <option value="$PROJECT_DIR$/ios/Classes/PhotosLibraryPlugin.m" />
         <option value="$PROJECT_DIR$/lib/photos_library.dart" />
+        <option value="$PROJECT_DIR$/lib/assetview.dart" />
       </list>
     </option>
   </component>
@@ -157,23 +175,6 @@
               <item name="flutter_photos_library" type="462c0819:PsiDirectoryNode" />
               <item name="example" type="462c0819:PsiDirectoryNode" />
               <item name="lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="flutter_photos_library" type="b2602c69:ProjectViewProjectNode" />
-              <item name="flutter_photos_library" type="462c0819:PsiDirectoryNode" />
-              <item name="ios" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="flutter_photos_library" type="b2602c69:ProjectViewProjectNode" />
-              <item name="flutter_photos_library" type="462c0819:PsiDirectoryNode" />
-              <item name="ios" type="462c0819:PsiDirectoryNode" />
-              <item name="Assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="flutter_photos_library" type="b2602c69:ProjectViewProjectNode" />
-              <item name="flutter_photos_library" type="462c0819:PsiDirectoryNode" />
-              <item name="ios" type="462c0819:PsiDirectoryNode" />
-              <item name="Classes" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="flutter_photos_library" type="b2602c69:ProjectViewProjectNode" />
@@ -224,7 +225,7 @@
     <frame x="0" y="23" width="1680" height="955" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24969475" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24969475" />
       <window_info id="Captures" order="1" side_tool="true" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
@@ -238,7 +239,7 @@
       <window_info anchor="bottom" id="Android Profiler" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Logcat" order="4" />
       <window_info anchor="bottom" id="Debug" order="5" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="6" visible="true" weight="0.32908458" />
+      <window_info anchor="bottom" id="Terminal" order="6" weight="0.32908458" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Flutter Performance" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
@@ -254,7 +255,21 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/photos_library.dart</url>
+          <line>87</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/lib/asset.dart">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -262,37 +277,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/assetview.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="557">
+          <caret line="61" column="27" selection-start-line="61" selection-start-column="27" selection-end-line="61" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../FlutterDevelopment/flutter/packages/flutter/lib/src/services/platform_channel.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="292" column="12" selection-start-line="292" selection-start-column="12" selection-end-line="292" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ios/Classes/PhotosLibraryPlugin.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="346" column="8" selection-start-line="346" selection-start-column="8" selection-end-line="346" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/example/lib/homeview.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1050">
-          <caret line="70" column="18" selection-start-line="70" selection-start-column="18" selection-end-line="70" selection-end-column="18" />
+        <state relative-caret-position="338">
+          <caret line="77" column="19" selection-start-line="77" selection-start-column="19" selection-end-line="77" selection-end-column="19" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/assetview.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
-          <caret line="57" column="3" selection-start-line="57" selection-start-column="3" selection-end-line="57" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/asset.dart">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ios/Classes/PhotosLibraryPlugin.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="204" column="8" selection-start-line="204" selection-start-column="8" selection-end-line="204" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/photos_library.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="70" column="20" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="20" />
+        <state relative-caret-position="715">
+          <caret line="90" column="3" lean-forward="true" selection-start-line="90" selection-start-column="3" selection-end-line="90" selection-end-column="3" />
         </state>
       </provider>
     </entry>

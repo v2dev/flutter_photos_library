@@ -74,4 +74,19 @@ class PhotosLibrary {
         .invokeMethod("requestVideo", [identifier, width, height]);
     return ret;
   }
+
+  static Future<String> requestVideoPath(
+      String identifier, int width, int height) async {
+    String path = await _channel
+        .invokeMethod("requestVideoPath", [identifier, width, height]);
+    return path;
+  }
+
+
+  static Future<String> testMethod(
+      String identifier, int width, int height) async {
+    String path = await _channel
+        .invokeMethod("testMethod", [identifier, width, height]);
+    return path;
+  }
 }

@@ -197,6 +197,148 @@ static NSString *const PhotosLibraryPluginChannelName = @"flutter.yang.me/photos
     return FALSE;
 }
 
+
+- (void)copyVideoPath:(FlutterMethodCall*)call withCompletion:(void (^)(NSString *result))block{
+    if([@"testMethod" isEqualToString:call.method]) {
+        if (@available(iOS 9.0, *)) {
+            
+            
+            if(call.arguments && [call.arguments isKindOfClass:[NSArray class]]) {
+                NSArray* arguments = call.arguments;
+                if([arguments[0] isKindOfClass:[NSString class]]) {
+                    NSString *identifier = arguments[0];
+                    
+                    
+                    
+                    PHFetchResult<PHAsset *> * results = [PHAsset fetchAssetsWithLocalIdentifiers:@[identifier] options:nil];
+                    
+                    if (results.count > 0) {
+                        PHAsset* asset = results[0];
+                        PHVideoRequestOptions* options = [PHVideoRequestOptions new];
+                        options.version = PHVideoRequestOptionsVersionOriginal;
+                        options.deliveryMode = PHVideoRequestOptionsDeliveryModeAutomatic;
+                        options.networkAccessAllowed = YES;
+                        
+                        [[PHImageManager defaultManager] requestAVAssetForVideo:asset options:options resultHandler: ^(AVAsset * _Nullable avasset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info)
+                         {
+                             
+                             
+                             
+                             NSArray *resources = [PHAssetResource assetResourcesForAsset:asset];
+                             NSString *filename = ((PHAssetResource*)resources[0]).originalFilename;
+                             
+                             NSString *pathToWrite = [NSTemporaryDirectory() stringByAppendingString:filename];
+                             NSURL *localpath = [NSURL fileURLWithPath:pathToWrite];
+                             PHAssetResourceRequestOptions *options = [PHAssetResourceRequestOptions new];
+                             options.networkAccessAllowed = YES;
+                             
+                             NSFileManager *fileManager = [NSFileManager defaultManager];
+                             
+                             
+                             if ([fileManager fileExistsAtPath:pathToWrite]){
+                                 NSLog(@"Yes file is there");
+                                 
+                                 NSFileManager *fileManager = [NSFileManager defaultManager];
+                                 NSError *error;
+                                 BOOL success = [fileManager removeItemAtPath:pathToWrite error:&error];
+                                 if (success) {
+                                     
+                                     NSLog(@"File Deleted");
+                                     [[PHAssetResourceManager defaultManager] writeDataForAssetResource:resources[0] toFile:localpath options:options completionHandler:^(NSError * _Nullable error) {
+                                         if (error) {
+                                             //                                     [Sys MyLog: [NSString stringWithFormat:@"Failed to write a resource: %@",[error localizedDescription]]];
+                                         }
+                                         
+                                         block(localpath.absoluteString);
+                                     }];
+                                 }
+                                 else
+                                 {
+                                     NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
+                                 }
+                                 
+                             }
+                             else {
+                                 NSLog(@"File is not there");
+                                 [[PHAssetResourceManager defaultManager] writeDataForAssetResource:resources[0] toFile:localpath options:options completionHandler:^(NSError * _Nullable error) {
+                                     if (error) {
+                                         //                                     [Sys MyLog: [NSString stringWithFormat:@"Failed to write a resource: %@",[error localizedDescription]]];
+                                     }
+                                     
+                                     block(localpath.absoluteString);
+                                 }];
+                             }
+                             
+                             
+                             
+                         }];
+                        
+                        
+                        
+                    }
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+}
+
+
+- (NSString *)handleRequestVideoPath:(FlutterMethodCall*)call result:(FlutterResult)result {
+    __block NSString *videoUrlPath;
+    if([@"requestVideoPath" isEqualToString:call.method]) {
+        if(call.arguments && [call.arguments isKindOfClass:[NSArray class]]) {
+            NSArray* arguments = call.arguments;
+            if(3 == arguments.count) {
+                if([arguments[0] isKindOfClass:[NSString class]]) {
+                    NSString *identifier = arguments[0];
+                    
+                    PHFetchResult<PHAsset *> * results = [PHAsset fetchAssetsWithLocalIdentifiers:@[identifier] options:nil];
+                    if (results.count > 0) {
+                        PHAsset* asset = results[0];
+                        PHVideoRequestOptions* options = [PHVideoRequestOptions new];
+                        options.version = PHVideoRequestOptionsVersionOriginal;
+                        options.deliveryMode = PHVideoRequestOptionsDeliveryModeAutomatic;
+                        options.networkAccessAllowed = NO;
+                        
+                        
+                        [[PHImageManager defaultManager] requestAVAssetForVideo:asset options:options resultHandler: ^(AVAsset * _Nullable avasset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info)
+                         {
+                             NSError *error;
+                             AVURLAsset *avurlasset = (AVURLAsset*) avasset;
+                             
+                             NSLog(@"File Path %@", avurlasset.URL);
+                             
+                             NSString *filename = [NSString stringWithFormat:@"/vidoe/%@", identifier];
+                             NSString *pathToWrite = [NSTemporaryDirectory() stringByAppendingString:filename];
+                             // Write to documents folder
+                             NSURL *fileURL = [NSURL fileURLWithPath:pathToWrite];
+                             if ([[NSFileManager defaultManager] copyItemAtURL:avurlasset.URL
+                                                                         toURL:fileURL
+                                                                         error:&error]) {
+                                 NSString *channelName = [PhotosLibraryPluginChannelName stringByAppendingFormat:@"/image/%@", identifier];
+                                 [self.messenger sendOnChannel:channelName message:nil];
+                                 NSLog(@"Copied correctly");
+                                 videoUrlPath = fileURL.absoluteString;
+                                 result(videoUrlPath);
+                                 
+                                 
+                             }
+                         }];
+                        
+                    }
+                }
+            }
+        }
+        result(videoUrlPath);
+    }
+    return videoUrlPath;
+}
+
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
     if([self handlePlatformVersion:call result:result]) {
         
@@ -216,6 +358,19 @@ static NSString *const PhotosLibraryPluginChannelName = @"flutter.yang.me/photos
     else if([self handleRequestVideo:call result:result]) {
         
     }
+    else if([self handleRequestVideoPath:call result:result]) {
+        
+    }
+    
+    //    if (call.method == "getPlatformVersion") {
+    
+    else if ([call.method isEqualToString:@"testMethod"]){
+        [self copyVideoPath:call withCompletion:^(NSString *resultPath) {
+            NSLog(@"Result %@", resultPath);
+            result(resultPath);
+        }];
+    }
+    
     else {
         result(FlutterMethodNotImplemented);
     }

@@ -49,12 +49,22 @@ class AssetState extends State<AssetView> {
   }
 
   void _requestThumbnail({int width, int height}) {
-    BinaryMessages.setMessageHandler(this._channelName, (message) {
-      this._imageData = message;
-      setState(() {});
-    });
+//    BinaryMessages.setMessageHandler(this._channelName, (message) {
+//      this._imageData = message;
+//      setState(() {});
+//    });
+//
+//    PhotosLibrary.requestThumbnail(this.asset.identifier, width, height);
+//    print("Vidoe Path ");
+//
+//    print(PhotosLibrary.requestVideoPath(this.asset.identifier, width, height));
 
-    PhotosLibrary.requestThumbnail(this.asset.identifier, width, height);
+  print(PhotosLibrary.testMethod(this.asset.identifier, width, height));
+
+
+
+
+
   }
 
   @override
