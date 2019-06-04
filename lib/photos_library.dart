@@ -67,4 +67,18 @@ class PhotosLibrary {
         .invokeMethod("requestThumbnail", [identifier, width, height]);
     return ret;
   }
+
+
+  static Future<String> requestVideoPath(String identifier) async {
+    String videoPath = await _channel
+        .invokeMethod("requestVideoPath", [identifier]);
+    return videoPath;
+  }
+
+  static Future<bool> deleteFilePath(
+      String filePath) async {
+    bool isDeleted = await _channel
+        .invokeMethod("deleteFilePath", [filePath]);
+    return isDeleted;
+  }
 }

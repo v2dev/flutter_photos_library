@@ -142,6 +142,125 @@ static NSString *const PhotosLibraryPluginChannelName = @"flutter.yang.me/photos
     return FALSE;
 }
 
+
+- (void)requestVideoPath:(FlutterMethodCall*)call withCompletion:(void (^)(NSString *resultVideoPath))block{
+    if([@"requestVideoPath" isEqualToString:call.method]) {
+        if (@available(iOS 9.0, *)) {
+            
+            
+            if(call.arguments && [call.arguments isKindOfClass:[NSArray class]]) {
+                NSArray* arguments = call.arguments;
+                if([arguments[0] isKindOfClass:[NSString class]]) {
+                    NSString *identifier = arguments[0];
+                    
+                    PHFetchResult<PHAsset *> * results = [PHAsset fetchAssetsWithLocalIdentifiers:@[identifier] options:nil];
+                    
+                    if (results.count > 0) {
+                        PHAsset* asset = results[0];
+                        PHVideoRequestOptions* options = [PHVideoRequestOptions new];
+                        options.version = PHVideoRequestOptionsVersionOriginal;
+                        options.deliveryMode = PHVideoRequestOptionsDeliveryModeAutomatic;
+                        options.networkAccessAllowed = YES;
+                        
+                        [[PHImageManager defaultManager] requestAVAssetForVideo:asset options:options resultHandler: ^(AVAsset * _Nullable avasset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info)
+                         {
+                             NSArray *resources = [PHAssetResource assetResourcesForAsset:asset];
+                             NSString *filename = ((PHAssetResource*)resources[0]).originalFilename;
+                             
+                             NSString *pathToWrite = [NSTemporaryDirectory() stringByAppendingString:filename];
+                             NSURL *localpath = [NSURL fileURLWithPath:pathToWrite];
+                             PHAssetResourceRequestOptions *options = [PHAssetResourceRequestOptions new];
+                             options.networkAccessAllowed = YES;
+                             
+                             NSFileManager *fileManager = [NSFileManager defaultManager];
+                             
+                             if ([fileManager fileExistsAtPath:pathToWrite]){
+                                 NSLog(@"Yes file is there");
+                                 
+                                 NSFileManager *fileManager = [NSFileManager defaultManager];
+                                 NSError *error;
+                                 BOOL success = [fileManager removeItemAtPath:pathToWrite error:&error];
+                                 if (success) {
+                                     
+                                     NSLog(@"File Deleted");
+                                     [[PHAssetResourceManager defaultManager] writeDataForAssetResource:resources[0] toFile:localpath options:options completionHandler:^(NSError * _Nullable error) {
+                                         if (error) {
+                                             //                                     [Sys MyLog: [NSString stringWithFormat:@"Failed to write a resource: %@",[error localizedDescription]]];
+                                         }
+                                         
+                                         block(localpath.absoluteString);
+                                     }];
+                                 }
+                                 else
+                                 {
+                                     NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
+                                 }
+                                 
+                             }
+                             else {
+                                 NSLog(@"File is not there");
+                                 [[PHAssetResourceManager defaultManager] writeDataForAssetResource:resources[0] toFile:localpath options:options completionHandler:^(NSError * _Nullable error) {
+                                     if (error) {
+                                         //                                     [Sys MyLog: [NSString stringWithFormat:@"Failed to write a resource: %@",[error localizedDescription]]];
+                                     }
+                                     
+                                     block(localpath.absoluteString);
+                                 }];
+                             }
+                             
+                             
+                             
+                         }];
+                        
+                        
+                        
+                    }
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+}
+
+-(BOOL)deleteFilePath:(FlutterMethodCall*)call result:(FlutterResult)result {
+    
+    if([@"deleteFilePath" isEqualToString:call.method]) {
+        if(call.arguments && [call.arguments isKindOfClass:[NSArray class]]) {
+            NSArray* arguments = call.arguments;
+            if([arguments[0] isKindOfClass:[NSString class]]) {
+                NSString *fileToDelete = arguments[0];
+                NSFileManager *fileManager = [NSFileManager defaultManager];
+                if ([fileManager fileExistsAtPath:fileToDelete]){
+                    NSLog(@"Yes file is there");
+                    
+                    NSFileManager *fileManager = [NSFileManager defaultManager];
+                    NSError *error;
+                    BOOL success = [fileManager removeItemAtPath:fileToDelete error:&error];
+                    if (success) {
+                        NSLog(@"File Deleted");
+                        result(@YES);
+                        return success;
+                    }
+                    else
+                    {
+                        NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
+                        result(@NO);
+                        return FALSE;
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    return FALSE;
+}
+
+
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
     if([self handlePlatformVersion:call result:result]) {
         
@@ -156,6 +275,17 @@ static NSString *const PhotosLibraryPluginChannelName = @"flutter.yang.me/photos
         
     }
     else if([self handleRequestThumbnail:call result:result]) {
+        
+    }
+    else if([call.method isEqualToString:@"requestVideoPath"]) {
+        [self requestVideoPath:call withCompletion:^(NSString *videoPath) {
+            
+            videoPath = [videoPath stringByReplacingOccurrencesOfString:@"file:///"
+                                                 withString:@"/"];
+            result(videoPath);
+        }];
+    }
+    else if([self deleteFilePath:call result:result]) {
         
     }
     else {
